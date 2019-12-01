@@ -141,8 +141,30 @@ This is a Node/Express/MySql REST API for hotel booking system.
               "quantity": "",
               "price": ""
           }
-          
-          
+
+
+## Admin Update room type  [POST /api/admin/updateroom/:id]
+
+- Body
+
+           {
+              "description": "",
+              "roomType": "",
+              "image": "",
+              "quantity": ,
+              "price": 
+           }
+           
+
+## Admin Delete room type  [POST /api/admin/deleteroom/:id]
+
+
+- Parameters
+
+    - id: 1 (number) - An unique identifier of one room type.
+
+
+
 ## Admin Get all reservation data  [GET /api/admin/getallrsv]
 
 - Request: Admin get all reservation details
