@@ -1,26 +1,246 @@
-# Contact Keeper
+# Hotel Booking System API
 
-> Full stack MERN contact manager with React hooks, context & JWT authentication. Part of my React course on Udemy.
+This is a Node/Express/MySql REST API for hotel booking system.
 
-This is the full app. The API can be found [here](https://github.com/bradtraversy/contact_keeper_api) with documented endpoints
-
-## Usage
-
-Install dependencies
+## Getting Started
 
 ```bash
-npm install
-npm client-install
+  create MySql database from file mysql-db.sql
+  
+  npm install
+  npm run server # Runs on http://localhost:5000
 ```
 
-### Mongo connection setup
+# API Usage & Endpoints
 
-Edit your /config/default.json file to include the correct MongoDB URI
+## Register a Customer User [POST /api/customer/register]
 
-### Run Server
+- Request: Add user
 
-```bash
-npm run dev     # Express & React :3000 & :5000
-npm run server  # Express API Only :5000
-npm run client  # React Client Only :3000
-```
+  - Headers
+
+        Content-type: application/json
+
+  - Body
+
+            {
+              "cusName": "",
+              "email": "",
+              "password": ""
+            }
+
+- Response: 200 (application/json)
+
+  - Body
+
+          {
+              "msg": "User created...",
+              "cusName": "",
+              "email": ""
+          }
+
+## Login with a User [POST /api/auth/login]
+
+- Request: Login with credentials
+
+  - Headers
+
+        Content-type: application/json
+
+  - Body
+
+            {
+              "email": "",
+              "password": ""
+            }
+
+- Response: 200 (application/json)
+
+  - Body
+
+          {
+            "msg": "Login success..."
+          }
+
+## Admin Get information of all rooms type  [GET /api/admin/getallrooms]
+
+- Request: Admin get all rooms details
+
+  - Headers
+
+        Content-type: application/json
+
+* Response: 200 (application/json)
+
+  - Body
+        
+          [ {
+              "roomId": ,
+              "description": "",
+              "roomType": "",
+              "image": "",
+              "quantity": ,
+              "price": 
+           } ]
+           
+         
+## Admin Get details information of one room type  [GET /api/admin/getroom/:id]
+
+- Request: Admin get room details by id
+
+  - Parameters
+
+    - id: 1 (number) - An unique identifier of the room type.
+
+  - Headers
+
+        Content-type: application/json
+
+* Response: 200 (application/json)
+
+  - Body
+        
+          {
+              "roomId": ,
+              "description": "",
+              "roomType": "",
+              "image": "",
+              "quantity": ,
+              "price": 
+          }
+           
+         
+## Admin Create new room type  [POST /api/admin/addroom]
+
+- Request: Admin create new room type
+
+   - Headers
+
+        Content-type: application/json
+
+  - Body
+
+           {
+              "description": "",
+              "roomType": "",
+              "image": "",
+              "quantity": ,
+              "price": 
+           }
+           
+     
+* Response: 200 (application/json)
+
+  - Body
+        
+          {
+              "msg": "Room type created...",
+              "roomType": "",
+              "description": "",
+              "image": "",
+              "quantity": "",
+              "price": ""
+          }
+          
+          
+## Admin Get all reservation data  [GET /api/admin/getallrsv]
+
+- Request: Admin get all reservation details
+
+  - Headers
+
+        Content-type: application/json
+
+* Response: 200 (application/json)
+
+  - Body
+        
+          [ {
+                "rsvId": ,
+                "cusName": "",
+                "description": "",
+                "roomQty": ,
+                "dateCheckIn": "",
+                "dateCheckOut": ""
+            } ]
+      
+      
+## Get available rooms on date range given  [GET /api/customer/getavailrooms]
+
+- Request: Customer get all avaiable rooms info on date range given
+
+  - Headers
+
+        Content-type: application/json
+
+  - Body
+
+           {
+              "checkIn": "",
+              "checkOut": ""
+           }
+
+* Response: 200 (application/json)
+
+  - Body
+        
+          [ {
+                "date": "",
+                "description": "",
+                "available": 
+            } ]
+   
+  
+## Customer make reservation booking  [POST /api/customer/addrsv]
+
+- Request: Customer get all avaiable rooms info on date range given
+
+  - Headers
+
+        Content-type: application/json
+
+  - Body
+
+           {
+              "cusId": ,
+              "roomId": ,
+              "dateCheckIn": "",
+              "dateCheckOut": "",
+              "roomQty": 
+            }
+
+* Response: 200 (application/json)
+
+  - Body
+        
+          {
+              "msg": "Reservation created...",
+              "cusId": ,
+              "roomId": ,
+              "dateCheckIn": "",
+              "dateCheckOut": "",
+              "roomQty": 
+          }
+
+
+## Customer DELETE their reservation booking by id  [POST /api/customer/deletersv/:id]
+
+- Request: Customer Cancel their reservation booking by id
+
+  - Parameters
+
+    - id: 1 (number) - An unique identifier of one booking.
+
+  - Headers
+
+        Content-type: application/json
+
+* Response: 200 (application/json)
+
+  - Body
+        
+          {
+              "msg": "Reservation Id: has been cancelled..."
+          }
+          
+ 
